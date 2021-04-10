@@ -1,20 +1,3 @@
-
-function test() {
-  insertData({
-    day:3,
-    month:4,
-    year:2021
-  })
-}
-
-function addAsNums(x, y){
-  console.log(typeof(x), typeof(y))
-  x = x == '' ? 0 : parseInt(x)
-  y = y == '' ? 0 : parseInt(y)
-  console.log(x, y)
-  return x + y;
-}
-
 function insertData(data) {
   const file    = SpreadsheetApp.getActive();
   const sheet   = file.getSheetByName('Tracking');
@@ -28,7 +11,7 @@ function insertData(data) {
       data[entry] = row[i]
       return data
     }, {})
-  } 
+  }
 
   const lastEntryArray = values.slice(-1)[0];
   const lastEntry = rowToObject(lastEntryArray)
@@ -50,7 +33,7 @@ function insertData(data) {
     updatedEntry["steps"] = updatedEntry["steps"] < data["steps"] ?
       data["steps"] : updatedEntry["steps"]
 
-    const newLastRow = [headers.map(title => updatedEntry[title])]
+    const newLastRow = [ headers.map(title => updatedEntry[title]) ]
     const lastRowRange = sheet.getRange(values.length + 1, 1, 1, values[0].length)
     lastRowRange.setValues(newLastRow)
     return "Entry Updated"
