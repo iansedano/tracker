@@ -1,11 +1,28 @@
-function insertData(data) {
+function getData(sheetName){
   const file    = SpreadsheetApp.getActive();
-  const sheet   = file.getSheetByName('Tracking');
+  const sheet   = file.getSheetByName(sheetName);
   const range   = sheet.getDataRange();
   const values  = range.getValues();
+}
 
+function getInitData(){
+  const values = getData("Tracking")
   const headers = values.shift();
+  const types = values.shift();
 
+  const data = new Data(headers, types);
+
+  let lastWeek = values.slice(-7,-1)
+
+  lastWeek.forEach( row => data.addEntry(row) )
+
+  return data
+}
+
+function insertData(data) {
+  const headers = values.shift();
+  const types = values.shift();
+ 
   function rowToObject(row) {
     return headers.reduce((data, entry, i) => {
       data[entry] = row[i]
