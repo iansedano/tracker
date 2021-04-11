@@ -3,6 +3,7 @@ function getData(sheetName){
   const sheet   = file.getSheetByName(sheetName);
   const range   = sheet.getDataRange();
   const values  = range.getValues();
+  return values;
 }
 
 function getInitData(){
@@ -12,7 +13,7 @@ function getInitData(){
 
   const data = new Data(headers, types);
 
-  let lastWeek = values.slice(-7,-1)
+  let lastWeek = values.slice(-7, values.length)
 
   lastWeek.forEach( row => data.addEntry(row) )
 

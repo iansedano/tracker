@@ -48,8 +48,10 @@
   </body>
 
   <?!= include('script') ?>
+  <?!= include('update') ?>
   <script>
-  <?!= data = getInitData() ?>
+  const data = <?!= JSON.stringify(getInitData()) ?>
+  console.log(data)
   </script>
   
 

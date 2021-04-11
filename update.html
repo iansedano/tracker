@@ -1,3 +1,5 @@
+<script>
+
 update = {};
 
 update.index = null;
@@ -29,10 +31,12 @@ update.list = (currentValue, newValue) => {
 }
 
 update.average = (currentValue, newValue) => {
-    if (!(Array.isArray(currentValue) && currentValue.length !== 2) {
+    if (!(Array.isArray(currentValue) && currentValue.length !== 2)) {
         throw "currentValue argument invalid"
     }
     let sum = currentValue[0] + newValue
     let avg = sum / currentValue[1] + 1
     return avg
 }
+
+</script>
