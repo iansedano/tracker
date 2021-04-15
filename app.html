@@ -1,0 +1,17 @@
+<script>
+console.log("starting app")
+console.log("This is the data", data)
+const now = new Date()
+console.log("today is ", now.toDateString)
+console.log("building page for today")
+console.log("creating index number for today")
+const todayIndex = getIndexFromDate(new Date())
+console.log("today index", todayIndex)
+const todayEntry = data[todayIndex]
+console.log("today entry", todayEntry)
+const form = buildForm(todayEntry)
+
+const root = document.getElementById('root')
+root.appendChild(form)
+
+</script>

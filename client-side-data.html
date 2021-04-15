@@ -1,0 +1,40 @@
+<script>
+
+class Data {
+    constructor(serverSideData) {
+        this.fields = serverSideData.fields
+        this.entries = serverSideData.entries
+        
+        this.fields.forEach = (callback) => {
+            serverSideData.headerArray.forEach((h, i) => {
+                const fieldMetadata = {
+                    name: h,
+                    type: this.fields[h].type
+                }
+                callback(fieldMetadata, i)
+            })
+        }
+
+        const now = new Date();
+
+        serverSideData.entries.forEach((entry, i) => {
+            const day = new Date()
+            day.setDate(now.getDate() - i)
+
+            const index = getIndexFromDate(day)
+            
+            this[index] = new Day(this.fields, entry)
+
+        })
+    }
+}
+
+
+class Day {
+    constructor(fieldMetadata, entry){
+        this.fields = fieldMetadata
+        Object.assign(this, entry)
+    }
+}
+
+</script>

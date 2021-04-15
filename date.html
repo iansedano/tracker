@@ -1,0 +1,52 @@
+<script>
+
+
+/**
+ * Function that will convert a date object or a time integer to a index 
+ * 
+*/
+function getIndexFromDate(date) {
+    const isDateObject = 
+        date
+        &&
+        Object.prototype.toString.call(date) === '[object Date]'
+        &&
+        !isNaN(date)
+    
+    if (isDateObject) {
+        const year = date.getFullYear()
+        let month = date.getMonth()
+        let day = date.getDate()
+
+        if (month.toString().length === 1){
+            month = '0' + month
+        }
+
+        if (day.toString().length === 1) {
+            day = '0' + day
+        }
+
+        return `${year}-${month}-${day}`
+
+    } else throw "not a date!"
+}
+
+function getDateFromIndex(index) {
+    const isValidIndex = 
+        typeof(index) === 'string'
+        &&
+        index.length === 10
+
+    if (isValidIndex) {
+        const dateComponents = index.split('-')
+        let year, month, day
+        [year, month, day] = [...dateComponents]
+        year = parseInt(year)
+        month = parseInt(month)
+        day = parseInt(day)
+    
+        return new Date(year, month, day)
+    } else throw "Invalid index!"
+}
+
+</script>

@@ -1,33 +1,33 @@
 <style>
   * {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
   }
 
-  #form {
+  .form {
     display: flex;
     flex-direction: column;
     height: 50%;
     max-width: 50%;
   }
 
-  #form * {
-    
-  }
-
-  .input {
+  .input-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-bottom: 2px;
   }
 
-  input {
-    width: 50%;
+  .cell {
+    font-size: 1.1rem;
+    color: rgb(49, 49, 49);
   }
 
-
+  .input {
+    width: 80px;
+  }
 
   @media (max-width: 480px) {
-    #form {
+    .form {
       height: auto;
       max-width: 100%;
     }

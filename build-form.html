@@ -1,0 +1,84 @@
+<script>
+
+function createLabel(label){
+    const labelElement = document.createElement('span')
+    labelElement.setAttribute('class', 'label')
+    labelElement.innerText = label
+    return labelElement
+    // TODO test if this can be done with method chaining
+}
+
+function createCell(value){
+    // TODO handle if value is list
+    const cellElement = document.createElement('span')
+    cellElement.setAttribute('class', 'cell')
+    cellElement.innerText = value
+    return cellElement
+}
+
+function createTextBox(name){
+    const inputElement = document.createElement('input')
+    inputElement.setAttribute('class', 'input')
+    inputElement.setAttribute('type', 'text')
+    inputElement.setAttribute('id', name + "-input")
+    return inputElement
+}
+
+function createUpdateButton(name, value, inputElement) {
+    const updateButton = document.createElement('button');
+    updateButton.innerText = 'update'
+    updateButton.setAttribute('class', 'update-button')
+
+    updateButton.addEventListener('click', () => {
+        let value = document.getElementById(name + "-input").value
+        if (value == "") return
+
+        sendUpdate({
+            name: name,
+            payload: {value: value}
+        })
+    })
+
+    return updateButton;
+}
+
+function createInputContainer(name, value) {
+    const label = createLabel(name)
+    const cell = createCell(value)
+    const textBox = createTextBox(name)
+    const button = createUpdateButton(name, value, textBox)
+
+    const inputContainer = document.createElement('div')
+    inputContainer.setAttribute('class', 'input-container')
+    inputContainer.appendChild(label)
+    inputContainer.appendChild(cell)
+    inputContainer.appendChild(textBox)
+    inputContainer.appendChild(button)
+    return inputContainer
+}
+
+
+function buildForm(day) {
+    console.log("starting to build form")
+    console.log(day)
+    const form = document.createElement('div')
+    form.setAttribute('class', 'form')
+    console.log("about to build elemetns in form")
+    day.fields.forEach(field => {
+        console.log(field.type)
+        if (field.type != "index" && field.type != "calc") {
+            let row = createInputContainer(
+                field.header,
+                day[field.header]
+                )
+            form.appendChild(row)
+        }
+    })
+
+    return form
+    
+}
+
+
+
+</script>

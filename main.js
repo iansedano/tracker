@@ -17,7 +17,8 @@ function getInitData(){
 
   lastWeek.forEach( row => data.addEntry(row) )
 
-  return data
+  const output = data.serialize()
+  return output
 }
 
 function insertData(data) {
