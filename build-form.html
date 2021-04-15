@@ -68,8 +68,8 @@ function buildForm(day) {
         console.log(field.type)
         if (field.type != "index" && field.type != "calc") {
             let row = createInputContainer(
-                field.header,
-                day[field.header]
+                field.name,
+                day[field.name]
                 )
             form.appendChild(row)
         }
