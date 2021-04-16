@@ -42,18 +42,19 @@ function createUpdateButton(name, value, inputElement) {
     return updateButton;
 }
 
-function createInputContainer(name, value) {
+function createInputContainer(name, type, value) {
     const label = createLabel(name)
     const cell = createCell(value)
     const textBox = createTextBox(name)
     const button = createUpdateButton(name, value, textBox)
 
     const inputContainer = document.createElement('div')
-    inputContainer.setAttribute('class', 'input-container')
-    inputContainer.appendChild(label)
-    inputContainer.appendChild(cell)
-    inputContainer.appendChild(textBox)
-    inputContainer.appendChild(button)
+    inputContainer
+        .setAttribute('class', 'input-container')
+        .appendChild(label)
+        .appendChild(cell)
+        .appendChild(textBox)
+        .appendChild(button)
     return inputContainer
 }
 
@@ -61,22 +62,23 @@ function createInputContainer(name, value) {
 function buildForm(day) {
     console.log("starting to build form")
     console.log(day)
+
     const form = document.createElement('div')
     form.setAttribute('class', 'form')
+
     console.log("about to build elemetns in form")
+
     day.fields.forEach(field => {
-        console.log(field.type)
         if (field.type != "index" && field.type != "calc") {
             let row = createInputContainer(
                 field.name,
+                field.type,
                 day[field.name]
                 )
             form.appendChild(row)
         }
     })
-
     return form
-    
 }
 
 
