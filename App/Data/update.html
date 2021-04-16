@@ -39,8 +39,30 @@ update.average = (currentValue, newValue) => {
     return avg
 }
 
-function sendUpdate(updateObject) {
-    
+function sendUpdate(payload) {
+    isValid = 
+        isValidIndex(payload.index)
+        && payload.name && payload.name !== null
+        && payload.type && payload.type !== null
+        && payload.value && payload.value !== null
+
+    if (isValid) {
+        const updateFunction = update[payload.type]
+        const currentValue = data[payload.index]
+        const result = updateFunction(currentValue, payload.value)
+
+        // data.entries[payload.index][payload.name] = value
+        // TODO do I need to update it? If not then it looks like I'll need
+        // to delete data.entries after the form has been generated
+        data[payload.index][payload.name] = value
+
+        // TODO
+        // send info back to insert value into row (do i need row index??)
+        // no, I don't need row index, it should be based of the dates
+        // then refresh the whole page or surgically update dom?
+
+    }
+
 }
 
 </script>

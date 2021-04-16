@@ -3,7 +3,7 @@
 class Data {
     constructor(serverSideData) {
         this.fields = serverSideData.fields
-        this.entries = serverSideData.entries
+        //this.entries = serverSideData.entries
         
         this.fields.forEach = (callback) => {
             serverSideData.headerArray.forEach((h, i) => {
@@ -23,7 +23,7 @@ class Data {
 
             const index = getIndexFromDate(day)
             
-            this[index] = new Day(this.fields, entry)
+            this[index] = new Day(index, this.fields, entry)
 
         })
     }
@@ -31,7 +31,8 @@ class Data {
 
 
 class Day {
-    constructor(fieldMetadata, entry){
+    constructor(index, fieldMetadata, entry){
+        this.index = index
         this.fields = fieldMetadata
         Object.assign(this, entry)
     }

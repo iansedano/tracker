@@ -15,8 +15,8 @@ function getIndexFromDate(date) {
     
     if (isDateObject) {
         const year = date.getFullYear()
-        let month = date.getMonth()
-        let day = date.getDate()
+        let month = date.getMonth() + 1
+        let day = date.getDate() + 1
 
         if (month.toString().length === 1){
             month = '0' + month
@@ -31,19 +31,19 @@ function getIndexFromDate(date) {
     } else throw "not a date!"
 }
 
-function getDateFromIndex(index) {
-    const isValidIndex = 
-        typeof(index) === 'string'
-        &&
-        index.length === 10
+function isValidIndex(index) {
+    return typeof(index) === 'string' && index.length === 10
+}
 
-    if (isValidIndex) {
+function getDateFromIndex(index) {
+
+    if (isValidIndex(index)) {
         const dateComponents = index.split('-')
         let year, month, day
         [year, month, day] = [...dateComponents]
         year = parseInt(year)
-        month = parseInt(month)
-        day = parseInt(day)
+        month = parseInt(month) - 1
+        day = parseInt(day) - 1
     
         return new Date(year, month, day)
     } else throw "Invalid index!"

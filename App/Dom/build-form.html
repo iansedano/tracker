@@ -24,7 +24,7 @@ function createTextBox(name){
     return inputElement
 }
 
-function createUpdateButton(name, value, inputElement) {
+function createUpdateButton(name, type, value, index, inputElement) {
     const updateButton = document.createElement('button');
     updateButton.innerText = 'update'
     updateButton.setAttribute('class', 'update-button')
@@ -33,28 +33,23 @@ function createUpdateButton(name, value, inputElement) {
         let value = document.getElementById(name + "-input").value
         if (value == "") return
 
-        sendUpdate({
-            name: name,
-            payload: {value: value}
-        })
+        sendUpdate( {index: index, name: name, type: type, value: value} )
+        // TODO, is type needed?? Can't it be inferred on the other side? or
+        // is redundancy here ok?
     })
 
     return updateButton;
 }
 
-function createInputContainer(name, type, value) {
+function createInputContainer(name, type, value, index) {
     const label = createLabel(name)
     const cell = createCell(value)
     const textBox = createTextBox(name)
-    const button = createUpdateButton(name, value, textBox)
+    const button = createUpdateButton(name, value, index, textBox)
 
     const inputContainer = document.createElement('div')
-    inputContainer
-        .setAttribute('class', 'input-container')
-        .appendChild(label)
-        .appendChild(cell)
-        .appendChild(textBox)
-        .appendChild(button)
+    inputContainer.setAttribute('class', 'input-container')
+    inputContainer.append(label, cell, textBox, button)
     return inputContainer
 }
 
@@ -73,7 +68,8 @@ function buildForm(day) {
             let row = createInputContainer(
                 field.name,
                 field.type,
-                day[field.name]
+                day[field.name],
+                day.index
                 )
             form.appendChild(row)
         }
