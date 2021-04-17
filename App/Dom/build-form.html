@@ -28,12 +28,38 @@ function createUpdateButton(name, type, value, index, inputElement) {
     const updateButton = document.createElement('button');
     updateButton.innerText = 'update'
     updateButton.setAttribute('class', 'update-button')
+    // console.log(inputElement)
 
     updateButton.addEventListener('click', () => {
-        let value = document.getElementById(name + "-input").value
-        if (value == "") return
+        const parentElement = inputElement.parentNode
+        console.log(parentElement)
 
-        sendUpdate( {index: index, name: name, type: type, value: value} )
+        if (inputElement.value === "") return
+
+        gasPayload = {
+            index: index,
+            name: name,
+            type: type,
+            value: inputElement.value
+        }
+        console.log(gasPayload)
+
+        //inputElement.value = ""
+
+        const cellElement = parentElement.children[1]
+        cellElement.innerText = "updating"
+
+
+        sendUpdate( gasPayload, (resp) => {
+            console.log("response", resp)
+            if (resp === 0) {
+                cellElement.innerText = "updated!"
+            } else {
+                cellElement.innerText = "error, please reload"
+            }
+        })
+
+
         // TODO, is type needed?? Can't it be inferred on the other side? or
         // is redundancy here ok?
     })
@@ -45,7 +71,7 @@ function createInputContainer(name, type, value, index) {
     const label = createLabel(name)
     const cell = createCell(value)
     const textBox = createTextBox(name)
-    const button = createUpdateButton(name, value, index, textBox)
+    const button = createUpdateButton(name, type, value, index, textBox)
 
     const inputContainer = document.createElement('div')
     inputContainer.setAttribute('class', 'input-container')

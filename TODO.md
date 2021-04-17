@@ -31,3 +31,5 @@
 - Refresh button
 
 - implementing hacked dispatcher
+
+- add onEdit functions for sheet, i.e. don't touch the index cols...

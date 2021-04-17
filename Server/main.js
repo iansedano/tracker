@@ -1,9 +1,15 @@
 function getData(sheetName){
+
+  const file    = SpreadsheetApp.getActive()
+  const sheet   = file.getSheetByName(sheetName)
+  const range   = sheet.getDataRange()
+  const values  = range.getValues()
+
   return {
-  file    : SpreadsheetApp.getActive(),
-  sheet   : file.getSheetByName(sheetName),
-  range   : sheet.getDataRange(),
-  values  : range.getValues()
+  file    : file,
+  sheet   : sheet,
+  range   : range,
+  values  : values
   }
 }
 
