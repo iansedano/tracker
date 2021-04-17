@@ -31,8 +31,15 @@ class Data {
   addEntry(row) {
     const entry = row.reduce((data, entry, i) => {
       const header = this.headerArray[i]
-      data[header] = row[i]
-      return data
+      const type = this.fields[header].type
+
+      if (type === "list" || type == "average") {
+        data[header] = entry.toString().split(",")
+        return data
+      } else {
+        data[header] = row[i] // is this not just entry??
+        return data
+      }
     }, {})
 
     this.entries.unshift(entry)
