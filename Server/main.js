@@ -1,13 +1,14 @@
 function getData(sheetName){
-  const file    = SpreadsheetApp.getActive();
-  const sheet   = file.getSheetByName(sheetName);
-  const range   = sheet.getDataRange();
-  const values  = range.getValues();
-  return values;
+  return {
+  file    : SpreadsheetApp.getActive();
+  sheet   : file.getSheetByName(sheetName);
+  range   : sheet.getDataRange();
+  values  : range.getValues();
+  }
 }
 
 function getInitData(){
-  const values = getData("Tracking")
+  const values = getData("Tracking").values
   const headers = values.shift();
   const types = values.shift();
 

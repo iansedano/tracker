@@ -61,6 +61,17 @@ function sendUpdate(payload) {
         // no, I don't need row index, it should be based of the dates
         // then refresh the whole page or surgically update dom?
 
+        const gasPayload = {
+            name: payload.name,
+            value: result,
+            index: payload.index,
+            colIndex: data.fields[payload.name].index
+        }
+
+        google.script.run
+            .withSuccessHandler()
+            .update(gasPayload)
+
     }
 
 }

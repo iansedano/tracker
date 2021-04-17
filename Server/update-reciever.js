@@ -1,4 +1,21 @@
-<script>
+function update(payload) {
+    // const gasPayload = {
+    //     name: payload.name,
+    //     value: result,
+    //     index: payload.index,
+    //     colIndex: data.fields[payload.name].index
+    // }
+    let sheet, values
+    { sheet, values } = getData();
+
+    const headers = values.slice(0,1)
+    
+    let lineToUpdate;
+
+    values.forEach((row, i) => {
+        const year = row[0]
+    })
+}
 
 function getIndexFromDate(date) {
     const isDateObject = 
@@ -43,5 +60,3 @@ function getDateFromIndex(index) {
         return new Date(year, month, day)
     } else throw "Invalid index!"
 }
-
-</script>
