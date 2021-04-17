@@ -1,9 +1,9 @@
 function getData(sheetName){
   return {
-  file    : SpreadsheetApp.getActive();
-  sheet   : file.getSheetByName(sheetName);
-  range   : sheet.getDataRange();
-  values  : range.getValues();
+  file    : SpreadsheetApp.getActive(),
+  sheet   : file.getSheetByName(sheetName),
+  range   : sheet.getDataRange(),
+  values  : range.getValues()
   }
 }
 

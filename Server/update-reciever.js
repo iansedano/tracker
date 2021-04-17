@@ -6,7 +6,7 @@ function update(payload) {
     //     colIndex: data.fields[payload.name].index
     // }
     let sheet, values
-    { sheet, values } = getData();
+    //{ sheet, values } = getData();
 
     const headers = values.slice(0,1)
     
