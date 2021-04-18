@@ -28,18 +28,30 @@ class Data {
    * Turn a row into an entry object. This is only for server-side rendering.
    * @param {array} row 
    */
+  // TODO add entry type handler functions...
   addEntry(row) {
     const entry = row.reduce((data, entry, i) => {
       const header = this.headerArray[i]
       const type = this.fields[header].type
-
-      if (type === "list" || type == "average") {
-        data[header] = entry.toString().split(",")
-        return data
+      if (type === "list") {
+        if (entry === "" || entry === 0) {
+          data[header] = []
+        } else {
+          data[header] = entry.toString().split(",")
+        }
+      } else if (type == "average") {
+        if (entry === "" || entry === 0) {
+          data[header] = [0,0]
+        } else {
+          const avgArray = entry.toString().split(",")
+          if (avgArray.length !== 2) throw "invalid array"
+          data[header] = avgArray
+          
+        }
       } else {
-        data[header] = row[i] // is this not just entry??
-        return data
+        data[header] = entry
       }
+      return data
     }, {})
 
     this.entries.unshift(entry)

@@ -31,7 +31,7 @@ update.list = (currentValue, newValue) => {
 }
 
 update.average = (currentValue, newValue) => {
-    if (!(Array.isArray(currentValue) && currentValue.length !== 2)) {
+    if (!(Array.isArray(currentValue)) && currentValue.length !== 2) {
         throw "currentValue argument invalid"
     }
     let sum = currentValue[0] + newValue
@@ -49,7 +49,7 @@ function sendUpdate(payload, callback) {
     console.log(isValid)
     if (isValid) {
         const updateFunction = update[payload.type]
-        const currentValue = data[payload.index]
+        const currentValue = data[payload.index][payload.name]
         const result = updateFunction(currentValue, payload.value)
 
         // data.entries[payload.index][payload.name] = value

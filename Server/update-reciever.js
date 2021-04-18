@@ -32,12 +32,13 @@ function update(payload) {
         ) {
             sheet
                 .getRange(i + 3, payload.colIndex + 1)
-                .setValue(payload.value)
+                .setValue(`${payload.value}`)
             throw "found!"
         }
     })
     } catch (e){
-        return 0
+        if (e === "found!") return payload.value
+        throw e
     }
 
     return 1
