@@ -8,6 +8,9 @@
 - add binge field as test
 - Add support for "go" button on mobile
 - Refresh button
+- Interfacing the sheet and form to make sure types are enforced, maybe this will involve adding type metadata.
+- extending type metadata as key:value pair...
+- Maybe having separate table with metadata instead of on same sheet, then presentation sheet. so 3 sheets, one for raw data, one for metadata, one for presentation
 
 **DONE**
 - Showing todays results

@@ -31,16 +31,23 @@ update.list = (currentValue, newValue) => {
 }
 
 update.average = (currentValue, newValue) => {
+    console.log("calculating average")
+    console.log("args", currentValue, newValue)
     if (!(Array.isArray(currentValue)) && currentValue.length !== 2) {
         throw "currentValue argument invalid"
     }
-    let sum = currentValue[0] + newValue
-    let avg = sum / currentValue[1] + 1
-    return avg
+    let [currentAvg, currentCount] = currentValue
+    currentAvg = parseInt(currentAvg)
+    currentCount = parseInt(currentCount)
+    const prevSum = currentAvg * currentCount
+    const sum = prevSum + parseInt(newValue)
+    const count = currentCount == 0 ? 1 : currentCount + 1
+    const avg = sum / count
+    return [avg, count]
 }
 
 function sendUpdate(payload, callback) {
-    console.log("checking validity")
+    console.log("checking payload validity")
     isValid = 
         isValidIndex(payload.index)
         && payload.name && payload.name !== null
@@ -69,12 +76,25 @@ function sendUpdate(payload, callback) {
             colIndex: data.fields[payload.name].index
         }
 
+        console.log("sending payload to backend")
+        console.log(gasPayload)
+
+        const callbacks = [callback, refreshData]
+        
+        function handleSuccess(resp) {
+            callbacks.forEach(c => c(resp))
+        }
+
         google.script.run
-            .withSuccessHandler(callback)
+            .withSuccessHandler(handleSuccess)
             .update(gasPayload)
 
     }
 
+}
+
+function refreshData(){
+    console.log("testing refresh data")
 }
 
 </script>
