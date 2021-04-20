@@ -1,6 +1,6 @@
 function update(payload) {
     // const gasPayload = {
-    //     name: payload.name,
+    //     name: payload.nasme,
     //     value: result,
     //     index: payload.index,
     //     colIndex: data.fields[payload.name].index
@@ -8,12 +8,12 @@ function update(payload) {
     console.log("payload recieved", payload)
     Logger.log(payload)
     
-    const { sheet, values } = getData("Tracking");
+    const { sheet, values } = getData();
 
     const headers = values.shift()
     const headerMetadata = values.shift()
 
-    const {year, month, day} = getIndexComponents(payload.index)
+    const {year, month, day} = getIndexComponentsFromIndex(payload.index)
 
     console.log(year, month, day)
 

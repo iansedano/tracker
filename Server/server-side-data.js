@@ -57,7 +57,31 @@ class Data {
     this.entries.unshift(entry)
   }
 
-  // Should I be keeping a global state here? No, this is server-side
+  checkIfHaveTodayEntry(){
+    const index = getIndexComponentsFromDate(new Date())
+    Logger.log("newly created index")
+    Logger.log(index)
+    Logger.log(this)
+    // TODO below needs to be adapted to find the dates...
+    // Though I feel like this needs to go at the beginning
+    // Within spreadsheet.js or straight after, as part of the initialization
+    // I am also thinking that the index needs to be an actual index...not
+    // something somwhere between an index and a date
+    if (this.entries.hasOwnProperty(index)) {
+      return true
+    } else return false
+  }
+
+  createBlankEntryForToday(){
+    const indexComponents = getIndexComponentsFromDate(new Date())
+    const row = this.headerArray.map(header => {
+      if (indexComponents.hasOwnProperty(header)){
+        return indexComponents[header]
+      } else return ""
+    })
+    this.addEntry(row)
+    addRowToSheet(row)
+  }
 
   serialize() {
     return JSON.stringify(this)
@@ -65,3 +89,30 @@ class Data {
 }
 
 
+function getInitData(){
+  const values = getData().values
+  const headers = values.shift();
+  const types = values.shift();
+
+  const data = new Data(headers, types);
+
+  const lastEntry = values.pop()
+
+  data.addEntry(lastEntry)
+
+  let lastWeek;
+  if (data.checkIfHaveTodayEntry()) {
+    Logger.log("Already have date for today!")
+    lastWeek = values.slice(-6, values.length)
+  } else {
+    Logger.log("no entry for today, creating")
+    data.createBlankEntryForToday()
+    lastWeek = values.slice(-5, values.length)
+  }
+  
+
+  lastWeek.forEach( row => data.addEntry(row) )
+
+  const output = data.serialize()
+  return output
+}
