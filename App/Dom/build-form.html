@@ -24,7 +24,7 @@ function createTextBox(name){
     return inputElement
 }
 
-function createUpdateButton(name, type, value, index, inputElement) {
+function createUpdateButton(name, type, value, index, inputElement, rowNumber) {
     const updateButton = document.createElement('button');
     updateButton.innerText = 'update'
     updateButton.setAttribute('class', 'update-button')
@@ -40,7 +40,8 @@ function createUpdateButton(name, type, value, index, inputElement) {
             index: index,
             name: name,
             type: type,
-            value: inputElement.value
+            value: inputElement.value,
+            "row-number": rowNumber
         }
         console.log(gasPayload)
 
@@ -69,11 +70,11 @@ function createUpdateButton(name, type, value, index, inputElement) {
     return updateButton;
 }
 
-function createInputContainer(name, type, value, index) {
+function createInputContainer(name, type, value, index, rowNumber) {
     const label = createLabel(name)
     const cell = createCell(value)
     const textBox = createTextBox(name)
-    const button = createUpdateButton(name, type, value, index, textBox)
+    const button = createUpdateButton(name, type, value, index, textBox, rowNumber)
 
     const inputContainer = document.createElement('div')
     inputContainer.setAttribute('class', 'input-container')
@@ -101,7 +102,8 @@ function buildForm(day) {
                 field.name,
                 field.type,
                 day[field.name],
-                day.index
+                day.index,
+                day["row-number"]
                 )
             form.appendChild(row)
         }

@@ -73,7 +73,8 @@ function sendUpdate(payload, callback) {
             name: payload.name,
             value: result,
             index: payload.index,
-            colIndex: data.fields[payload.name].index
+            colNumber: data.fields[payload.name].index,
+            "row-number": payload["row-number"]
         }
 
         console.log("sending payload to backend")

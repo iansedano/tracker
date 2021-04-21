@@ -12,7 +12,7 @@
   <?!= include('App/Data/DateIndex') ?>
   <?!= include('App/Data/client-side-data') ?>
 
-  <script> const data = <?!= getInitData() ?> </script>
+  <script> const data = new Data(<?!= getInitData() ?>) </script>
 
   <?!= include('App/Dom/build-form') ?>
   <?!= include('App/Dom/app') ?>

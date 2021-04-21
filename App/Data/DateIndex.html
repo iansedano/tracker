@@ -27,7 +27,8 @@ function getIndexFromDate(date) {
 }
 
 function isValidIndex(index) {
-    return typeof(index) === 'string' && index.length === 10
+    return typeof(index) === 'string' && 
+    (index.length <= 10 || index.length >= 8)
 }
 
 function getDateFromIndex(index) {
