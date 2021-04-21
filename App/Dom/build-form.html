@@ -92,7 +92,11 @@ function buildForm(day) {
     console.log("about to build elemetns in form")
 
     day.fields.forEach(field => {
-        if (field.type != "index" && field.type != "calc") {
+        if (
+            field.type !== "index"
+            && field.type !== "calc"
+            && field.type !== "_"
+        ) {
             let row = createInputContainer(
                 field.name,
                 field.type,
