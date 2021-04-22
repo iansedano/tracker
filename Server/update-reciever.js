@@ -3,7 +3,7 @@ function update(payload) {
     //     name: payload.nasme,
     //     value: result,
     //     index: payload.index,
-    //     colIndex: data.fields[payload.name].index,
+    //     colNumber: data.fields[payload.name].index,
     //     row-number: rowNumber
     // }
     console.log("payload recieved", payload)
@@ -11,7 +11,7 @@ function update(payload) {
 
     db = new SheetDB("Tracking")
 
-    db.update(payload.rowNumber, payload.colIndex, payload.value)
+    db.update(payload["row-number"], payload.colNumber - 1, payload.value)
 
     return payload.value
 }

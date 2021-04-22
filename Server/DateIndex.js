@@ -25,7 +25,8 @@ function getIndexFromDate(date) {
 }
 
 function isValidIndex(index) {
-    return typeof(index) === 'string' && index.length === 10
+    return typeof(index) === 'string' &&
+    (index.length <= 10 || index.length >= 8)
 }
 
 function getDateFromIndex(index) {
@@ -48,7 +49,7 @@ function getIndexComponentsFromIndex(index) {
             month:parseInt(month),
             day:parseInt(day)
         }
-    }
+    } else throw "invalid index!"
 }
 
 function getIndexComponentsFromDate(date) {

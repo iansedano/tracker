@@ -5,11 +5,9 @@ function createLabel(label){
     labelElement.setAttribute('class', 'label')
     labelElement.innerText = label
     return labelElement
-    // TODO test if this can be done with method chaining
 }
 
 function createCell(value){
-    // TODO handle if value is list
     const cellElement = document.createElement('span')
     cellElement.setAttribute('class', 'cell')
     cellElement.innerText = value
@@ -34,7 +32,7 @@ function createUpdateButton(name, type, value, index, inputElement, rowNumber) {
         const parentElement = inputElement.parentNode
         console.log(parentElement)
 
-        if (inputElement.value === "") return
+        if (inputElement.value === "") throw "empty value"
 
         gasPayload = {
             index: index,
@@ -43,13 +41,10 @@ function createUpdateButton(name, type, value, index, inputElement, rowNumber) {
             value: inputElement.value,
             "row-number": rowNumber
         }
-        console.log(gasPayload)
-
-        //inputElement.value = ""
+        console.log("gas payload from button", gasPayload)
 
         const cellElement = parentElement.children[1]
         cellElement.innerText = "updating"
-
 
         sendUpdate( gasPayload, (resp) => {
             console.log("response", resp)

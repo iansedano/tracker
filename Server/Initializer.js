@@ -36,6 +36,7 @@ function ensureDbLastEntryIsToday(db){
                 return indexComponents[header]
             } else return ""
         })
+        newRow.splice(0,2) // to remove the utility row and index fields
         db.addRow(newRow)
     }
 }

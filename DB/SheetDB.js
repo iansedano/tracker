@@ -68,12 +68,20 @@ class SheetDB {
 
     addRow(row) {
         if (this._totalWidth === row.length) {
-            this.sheet.appendRow(row)
-        } else throw "row not of right length"
+            this._sheet.appendRow(row)
+            this._fullRange     = this._sheet.getDataRange()
+            this._totalHeight   = this._fullRange.getHeight()
+            this._dataRows      = this._totalHeight - 2
+        } else throw "row not of right length, mind the row-number and index cells"
+        SpreadsheetApp.flush()
     }
 
     update(row, col, value){
+        console.log("update request recieved", row, col, value)
+        if (Array.isArray(value)) value = value.join(",")
+        console.log("after array check", value)
         this._sheet.getRange(row, col).setValue(value)
+        SpreadsheetApp.flush()
     }
     
 }
