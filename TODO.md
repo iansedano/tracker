@@ -1,11 +1,9 @@
 ### NOW
 
-- Get lists working for sets etc
+
 
 ### Primary
 
-- Supporting "sets" lists for excercises and notes
-- add binge field as test
 - Add support for "go" button on mobile
 - Refresh button
 - Interfacing the sheet and form to make sure types are enforced, maybe this will involve adding type metadata.
@@ -13,6 +11,8 @@
 - Maybe having separate table with metadata instead of on same sheet, then presentation sheet. so 3 sheets, one for raw data, one for metadata, one for presentation
 
 **DONE**
+- Get lists working for sets etc
+- Supporting "sets" lists for excercises and notes
 - Showing todays results
 - get clasp working
 - Notes Column
@@ -38,4 +38,3 @@
     // Or would it need to be something super convoluted like:
     Data.fields.filter(o => o.name == "steps")[0]
     ```
-- look into android hello world (is it even faster?)
