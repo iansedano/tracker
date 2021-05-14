@@ -48,13 +48,9 @@ function createUpdateButton(name, type, value, index, inputElement, rowNumber) {
 
         sendUpdate( gasPayload, (resp) => {
             console.log("response", resp)
-            if (resp !== 1) {
-                cellElement.innerText = resp
-                inputElement.value = ""
-                data[index][name] = resp
-            } else {
-                cellElement.innerText = "error, please reload"
-            }
+            cellElement.innerText = resp
+            inputElement.value = ""
+            data[index][name] = resp
         })
 
 

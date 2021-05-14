@@ -3,10 +3,11 @@
  * 
  */
 
-function getInitData(){
+ function getInitData(){
     const db = new SheetDB("Tracking")
     
-    ensureDbLastEntryIsToday(db)
+    if (checkIfSheetEmpty(db)) createTodayEntry(db)
+    if (!checkLastEntryIsToday(db)) createTodayEntry(db)
 
     const lastWeekValues = db.getData(7)
     const headers = db.getHeaders()
@@ -20,23 +21,32 @@ function getInitData(){
     return output
   }
 
-function ensureDbLastEntryIsToday(db){
+function checkLastEntryIsToday(db){
     const values = db.getData(1)
     Logger.log(values)
     const indexToCheck = getIndexFromDate(new Date())
     console.log("index to check", indexToCheck)
     console.log("values 0 1", values[0][1])
     if (values[0][1] == indexToCheck) {
-        return
+        return true
     } else {
         Logger.log("Last Entry is not today! Creating...")
-        const indexComponents = getIndexComponentsFromIndex(indexToCheck)
-        const newRow = db.getHeaders().map((header) => {
-            if (indexComponents.hasOwnProperty(header)) {
-                return indexComponents[header]
-            } else return ""
-        })
-        newRow.splice(0,2) // to remove the utility row and index fields
-        db.addRow(newRow)
+        return false
     }
+}
+
+function createTodayEntry(db){
+  const todayIndex = getIndexFromDate(new Date())
+  const indexComponents = getIndexComponentsFromIndex(todayIndex)
+  const newRow = db.getHeaders().map((header) => {
+      if (indexComponents.hasOwnProperty(header)) {
+          return indexComponents[header]
+      } else return ""
+  })
+  newRow.splice(0,2) // to remove the utility row and index fields
+  db.addRow(newRow)
+}
+
+function checkIfSheetEmpty(db) {
+  if (db._dataRows === 0) return true
 }

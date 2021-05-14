@@ -1,6 +1,5 @@
 /**
  * Assumptions
- * - That this is run from a bounded script (to a spreadsheet)
  * - that data is always ordered. I.e. Last entry will be latest.
  * - that table starts at A1
  * - 1st row will be header titles
@@ -11,7 +10,7 @@
  */
 class SheetDB {
     constructor (sheetName) {
-        this._file          = SpreadsheetApp.getActive()
+        this._file          = SpreadsheetApp.openById("")
         this._sheet         = this._file.getSheetByName(sheetName)
         this._fullRange     = this._sheet.getDataRange()
         
@@ -72,7 +71,7 @@ class SheetDB {
             this._fullRange     = this._sheet.getDataRange()
             this._totalHeight   = this._fullRange.getHeight()
             this._dataRows      = this._totalHeight - 2
-        } else throw "row not of right length, mind the row-number and index cells"
+        } else throw "row not of right length, remember the row-number and index cells"
         SpreadsheetApp.flush()
     }
 

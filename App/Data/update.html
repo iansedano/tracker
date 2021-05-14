@@ -16,6 +16,8 @@ update.replaceIfGreater = (currentValue, newValue) => {
 }
 
 update.increment = (currentValue, newValue) => {
+    if (currentValue == "") currentValue = 0
+    newValue = parseInt(newValue)
     if (!Number.isInteger(currentValue) || !Number.isInteger(newValue)) {
         throw "One of the arguments is not a number"
     }
