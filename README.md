@@ -93,6 +93,8 @@ Then press "Deploy" and it should prompt you to grant access, warning you that G
 
 You will then be given a Web app URL where your tracker app should be live!
 
+The site is designed for mobile. It is suggested that you put a shortcut to the URL on your home screen to make it quick and easy to track things!
+
 ### Things NOT to do
 
 - Do not put in any notes or data outside the main table. You can manually insert entries, but do not put notes in the rows beneath or to the right of the main table. This is because the script grabs the whole data range dynamically, and if you put some random value in cell `Z1000`, there will be bugs!
